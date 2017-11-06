@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-sinvoice" version="2.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-plugin-sinvoice</name>
+    <js-module name="sinVoice" src="www/cordova-plugin-sinvoice.js">
+        <clobbers target="sinVoice" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="SinVoice">
+                <param name="android-package" value="com.thomas.sinvoice.SinVoice" />
+            </feature>
+
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+            <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+
+        <source-file src="src/android/src/libs/armeabi/libsinvoice.so" target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/src/libs/x86/libsinvoice.so" target-dir="libs/x86"/>
+
+        <source-file src="src/android/src/com/thomas/sinvoice/SinVoice.java" target-dir="src/com/thomas/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/BufferData.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/BufferQueue.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/Common.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/Encoder.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/LogHelper.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/PcmPlayer.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/Queue.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/Record.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/SinVoicePlayer.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/SinVoiceRecognition.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/VoiceDecoder.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/VoiceEncoder.java" target-dir="src/com/libra/sinvoice"/>
+        <source-file src="src/android/src/com/libra/sinvoice/VoiceRecognition.java" target-dir="src/com/libra/sinvoice"/>
+    </platform>
+
+    <!-- ios -->
+     <platform name="ios">
+         <config-file target="config.xml" parent="/*">
+             <feature name="SinVoice">
+                 <param name="ios-package" value="CDVSinVoice" />
+             </feature>
+         </config-file>
+
+         <header-file src="src/ios/ESPcmPlayer.h" />
+         <source-file src="src/ios/GSAppDelegate.m" />
+         <header-file src="src/ios/CDVSinVoice.h" />
+         <source-file src="src/ios/CDVSinVoice.m" />
+
+         <header-file src="src/ios/GSAppDelegate.h" />
+         <header-file src="src/ios/ESPcmRecorder.h" />
+         <header-file src="src/ios/MyPcmRecorderImp.h" />
+         <header-file src="src/ios/ESType.h" />
+         
+         <header-file src="src/ios/MyPcmPlayerImp.h" />
+         <source-file src="src/ios/MyPcmPlayerImp.m" />
+         <source-file src="src/ios/MyPcmRecorderImp.m" />
+         <header-file src="src/ios/SinVoicePlayer.h" />
+        <header-file src="src/ios/SinVoiceRecognizer.h" />
+
+         <framework src="AudioToolbox.framework"  />
+         <framework src="CoreGraphics.framework" />
+         <framework src="Foundation.framework" />
+         <framework src="UIKit.framework" />
+        <framework src="src/ios/libSVSinVoiceLib.a" custom="true" />
+        
+         <preference name="MICROPHONE_USAGE_DESCRIPTION" default=" " />
+         <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
+             <string>$MICROPHONE_USAGE_DESCRIPTION</string>
+         </config-file>
+
+         
+     </platform>
+</plugin>
